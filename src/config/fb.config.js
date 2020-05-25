@@ -17,4 +17,6 @@ var firebaseConfig = {
 //   firebase.analytics();
   firebase.firestore().settings({timestampsInSnapshots: true});
 
-  export default firebase;
+const db = firebase.firestore();
+export { db };
+export default firebase;
