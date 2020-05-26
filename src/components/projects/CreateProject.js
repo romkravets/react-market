@@ -25,7 +25,7 @@ export class CreateProject extends Component {
       return (
          <div className="container">
             <form onSubmit={this.handleSubmit} className="white">
-               <h5 className="grey-text text-darcen-3">Sign In</h5>
+               <h5 className="grey-text text-darcen-3">Create Product</h5>
                <div className="input-field">
                   <label htmlFor="title">Title</label>
                   <input type="text" id="title" onChange={this.handleChange}/>
