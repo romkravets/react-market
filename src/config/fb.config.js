@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 
 var firebaseConfig = {
     apiKey: "AIzaSyApVv85pmjoTA1xA6SPpupWeF9wESXc7zA",
@@ -18,5 +19,6 @@ var firebaseConfig = {
   firebase.firestore().settings({timestampsInSnapshots: true});
 
 const db = firebase.firestore();
+const storage = firebase.storage();
 export { db };
-export default firebase;
+export { storage, firebase as default};
