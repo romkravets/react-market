@@ -11,16 +11,19 @@ const ProjectDetails = (props) => {
    if (project) {
      return(
       <div className="container section project-details">
-      <div className="card z-depth-0">
-         <div className="card-content">
-            <span className="card-title">{ project.title }</span>
-            <p>{ project.content }</p>
+         <div className="card z-depth-0">
+            <div className="card-content">
+               <div class="card-image">
+                  <img src={project.imgUrl} alt={project.title}/>
+               </div>
+               <span className="card-title">{ project.title }</span>
+               <p>{ project.content }</p>
+            </div>
+            <div className="card-action gret lighten-4 grey-text">
+               <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
+               <div>{moment(project.createAt.toDate()).calendar()}</div>
+            </div>
          </div>
-         <div className="card-action gret lighten-4 grey-text">
-            <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
-            <div>{moment(project.createAt.toDate()).calendar()}</div>
-         </div>
-      </div>
    </div>
    )
   } else {
