@@ -4,13 +4,12 @@ import ProjectList from '../projects/ProjectList';
 import Notifications from './Notification';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
    render() {
-      //console.log(this.props);
       const { projects, auth, notifications } = this.props;
 
       if (!auth.uid) return <Redirect to='/signin'/>
@@ -42,6 +41,6 @@ export default compose(
    connect(mapStateToProps),
    firestoreConnect([
       { collection: 'projects', orderBy: ['createAt', 'desc'] },
-      { collection: 'notifications', limin: 3, orderBy: ['time', 'desc'] }
+      { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
    ])
 )(Dashboard);

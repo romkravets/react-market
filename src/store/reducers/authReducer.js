@@ -1,5 +1,6 @@
 const initState = {
-   authError: null
+   authError: null,
+   favoritList: []
 }
 
 const authReducer = (state = initState, action) => {
@@ -30,6 +31,11 @@ const authReducer = (state = initState, action) => {
          return {
             ...state,
             authError: action.err.message
+         }
+      case 'UPDATE_SUCCESS':
+         console.log('You are' + action.test);
+         return {
+            ...state
          }
       default:
          return state;
