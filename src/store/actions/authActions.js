@@ -33,12 +33,44 @@ export const signUp = (newUser) => {
        return db.collection('users').doc(resp.user.uid).set({
          firstName: newUser.firstName,
          lastName: newUser.lastName,
-         initials: newUser.firstName[0] + newUser.lastName[0]
+         initials: newUser.firstName[0] + newUser.lastName[0],
        });
      }).then(() => {
        dispatch({ type: 'SIGNUP_SUCCESS' });
      }).catch((err) => {
        dispatch({ type: 'SIGNUP_ERROR', err});
      });
+   }
+ }
+
+ export const updateUserInfo = () => {
+   return (dispatch, getState, {getFirebase, getFirestore}) => {
+    const currentUser = firebase.auth().currentUser;
+   //  .then(() => {
+      // dispatch({ type: 'UPDATE_SUCCESS' });
+      console.log('You are' , currentUser.uid);
+      const uid = currentUser.uid;
+      const userDate = {
+         lastlogitTime: new Date(),
+         favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB',]
+      };
+      return firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
+   //  });
+
+   }
+ }
+
+ export const getFavorits = () => {
+   return (dispatch, getState, {getFirebase, getFirestore}) => {
+      const uid =  firebase.auth().currentUser.uid;
+      const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
+      getFavoritsFunctions({uid: uid})
+         .then((result) => {
+         console.log(result);
+         result.data.forEach(project => {
+            const test = JSON.stringify(result);
+            dispatch({ type: 'UPDATE_SUCCESS', test });
+         })
+      })
    }
  }

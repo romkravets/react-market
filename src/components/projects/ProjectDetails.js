@@ -3,9 +3,19 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import {Redirect} from 'react-router-dom';
+import { updateUserInfo } from '../../store/actions/authActions';
+import { getFavorits } from '../../store/actions/authActions';
 import moment from 'moment';
 
 const ProjectDetails = (props) => {
+
+ const hendleFavorite = (project, id) => {
+   console.log('click');
+   console.log(props.id);
+   props.updateUserInfo();
+   props.getFavorits();
+ }
+
   const { project, auth } = props;
    if (!auth.uid) return <Redirect to='/signin'/>
    if (project) {
@@ -15,6 +25,7 @@ const ProjectDetails = (props) => {
             <div className="card-content">
                <div class="card-image">
                   <img src={project.imgUrl} alt={project.title}/>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}><i class="material-icons"></i></a>
                </div>
                <span className="card-title">{ project.title }</span>
                <p>{ project.content }</p>
@@ -41,12 +52,22 @@ const mapStateToProps = (state, ownProps) => {
    const project = projects ? projects[id] : null;
    return {
       project: project,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      id: ownProps.match.params.id
    }
 }
 
+const mapDispatchToProps = (dispatch) => {
+   return {
+      updateUserInfo: () => dispatch(updateUserInfo()),
+      getFavorits: () => dispatch(getFavorits())
+   }
+}
+
+
+
 export default compose(
-   connect(mapStateToProps),
+   connect(mapStateToProps, mapDispatchToProps),
    firestoreConnect([
       { collection: 'projects' }
    ])

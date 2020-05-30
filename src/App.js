@@ -6,6 +6,7 @@ import ProjectDeaitls from './components/projects/ProjectDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
+import FavoriteProject from './components/projects/FavoriteProject';
 
 class App extends Component {
   render() {
@@ -18,7 +19,8 @@ class App extends Component {
             <Route path="/project/:id" component={ProjectDeaitls} />
             <Route  path="/signin" component={SignIn} />
             <Route  path="/signup" component={SignUp} />
-             <Route  path="/create" component={CreateProject} />
+            <Route  path="/create" component={CreateProject} />
+            <Route  path="/favorite" component={FavoriteProject} />
           </Switch>
         </div>
       </BrowserRouter>
