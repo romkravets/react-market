@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import {Redirect} from 'react-router-dom';
-import { updateUserInfo } from '../../store/actions/authActions';
-import { getFavorits } from '../../store/actions/authActions';
+import { addToFavorites } from '../../store/actions/authActions';
 import moment from 'moment';
 
 const ProjectDetails = (props) => {
 
  const hendleFavorite = (project, id) => {
-   console.log('click');
-   console.log(props.id);
-   props.updateUserInfo();
-   props.getFavorits();
+   // console.log('click');
+   // console.log(props.id);
+   // props.updateUserInfo();
+   // props.getFavorits(project.id);
+   props.addToFavorites(props.id);
  }
 
   const { project, auth } = props;
@@ -59,8 +59,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      updateUserInfo: () => dispatch(updateUserInfo()),
-      getFavorits: () => dispatch(getFavorits())
+      // updateUserInfo: () => dispatch(updateUserInfo()),
+      // getFavorits: () => dispatch(getFavorits()),
+      addToFavorites: (id) => dispatch(addToFavorites(id))
    }
 }
 

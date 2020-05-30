@@ -22,7 +22,7 @@ export class FavoriteProject extends Component {
             const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
             getFavoritsFunctions({uid: uid})
                .then((result) => {
-               console.log(result);
+               // console.log(result);
                // result.data.forEach(project => {
                   // const test = JSON.stringify(result);
                   this.setState({data: result})
@@ -37,7 +37,7 @@ export class FavoriteProject extends Component {
    render() {
       const { profile } = this.props;
       // const { date } = this.state.data.data;
-      console.log(this.state.data.data, 'state');
+      // console.log(this.state.data.data, 'state');
 
        return (
          <div className="container project-list section">
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
    return {
       createProject: (project) => dispatch(createProject(project)),
       updateUserInfo: () => dispatch(updateUserInfo()),
-      getFavorits: () => dispatch(getFavorits())
+      getFavorits: () => dispatch(getFavorits()),
    }
 }
 

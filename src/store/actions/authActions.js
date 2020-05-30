@@ -52,7 +52,7 @@ export const signUp = (newUser) => {
       const uid = currentUser.uid;
       const userDate = {
          lastlogitTime: new Date(),
-         favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB', 'Qedua3XamHxkK8IqPG0j']
+         // favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB', 'Qedua3XamHxkK8IqPG0j']
       };
       return firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
    //  });
@@ -72,5 +72,16 @@ export const signUp = (newUser) => {
             dispatch({ type: 'UPDATE_SUCCESS', test });
          })
       })
+   }
+ }
+
+ export const addToFavorites = (projectId) => {
+   return (dispatch, getState, {getFirebase, getFirestore}) => {
+      const currUserId = firebase.auth().currentUser.uid;
+      const userDoc = firebase.firestore().collection('users').doc(currUserId);
+      console.log('Adding ' + projectId + ' to favorite');
+      userDoc.update({
+         favoritsList: firebase.firestore.FieldValue.arrayUnion(projectId)
+      });
    }
  }
