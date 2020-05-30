@@ -36,14 +36,11 @@ export class FavoriteProject extends Component {
 
    render() {
       const { profile } = this.props;
-      // const { date } = this.state.data.data;
-      // console.log(this.state.data.data, 'state');
-
        return (
          <div className="container project-list section">
             <div className="project-list section">
             {this.state.data.data && this.state.data.data.map( project => {
-                  console.log(project.title, 'project');
+                  // console.log(project.title, 'project');
                return (
                   <Link to={'/project/' + project.id} key={project.id}>
                      <ProjectSummary  project={project}/>

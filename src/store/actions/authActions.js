@@ -46,15 +46,21 @@ export const signUp = (newUser) => {
  export const updateUserInfo = () => {
    return (dispatch, getState, {getFirebase, getFirestore}) => {
     const currentUser = firebase.auth().currentUser;
+    let userFavorits = [];
    //  .then(() => {
       // dispatch({ type: 'UPDATE_SUCCESS' });
       console.log('You are' , currentUser.uid);
       const uid = currentUser.uid;
-      const userDate = {
-         lastlogitTime: new Date(),
-         // favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB', 'Qedua3XamHxkK8IqPG0j']
-      };
-      return firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
+      const userDate = {lastlogitTime: new Date()};
+      const updatePromiss = firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
+      const getPromiss = firebase.firestore().doc(`users/${uid}`).onSnapshot((doc) => {
+         const userData = doc.data();
+         if (userData.favoritsList) {
+            userFavorits = userData.favoritsList;
+            console.log('You favorite are' + userFavorits);
+         }
+      });
+      return Promise.all([updatePromiss, getPromiss]);
    //  });
 
    }
@@ -82,6 +88,18 @@ export const signUp = (newUser) => {
       console.log('Adding ' + projectId + ' to favorite');
       userDoc.update({
          favoritsList: firebase.firestore.FieldValue.arrayUnion(projectId)
+      });
+   }
+ }
+
+
+ export const removeFromFavorites = (projectId) => {
+   return (dispatch, getState, {getFirebase, getFirestore}) => {
+      const currUserId = firebase.auth().currentUser.uid;
+      const userDoc = firebase.firestore().collection('users').doc(currUserId);
+      console.log('Remove ' + projectId + ' to favorite');
+      userDoc.update({
+         favoritsList: firebase.firestore.FieldValue.arrayRemove(projectId)
       });
    }
  }
