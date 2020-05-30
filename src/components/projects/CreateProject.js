@@ -29,6 +29,7 @@ export class CreateProject extends Component {
 
    handleUpload = (e) => {
       e.preventDefault();
+      if (this.state.image) {
       const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
       uploadTask.on(
          "state_changed",
@@ -58,6 +59,9 @@ export class CreateProject extends Component {
             });
          }
       );
+      } else {
+         console.log('Add image pleace');
+      }
    }
 
    render() {
