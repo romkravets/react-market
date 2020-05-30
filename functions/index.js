@@ -65,7 +65,13 @@ exports.getFavorites_v0 = functions.https.onCall(async(data, context) => {
       fetchPromises.push(nextPromiss);
     });
     const snapshots = await Promise.all(fetchPromises);
-      const responseArray = snapshots.map((snapshot) => { return snapshot.data()});
+      const responseArray = snapshots.map((snapshot) => {
+        const snapData = snapshot.data();
+        if (snapData) {
+          snapData['id'] = snapshot.id;
+        }
+        return snapData;
+      }).filter((item) => item);
       console.log('Done fetching' + (util.inspect(responseArray)));
       return responseArray;
   } else {
@@ -93,8 +99,14 @@ exports.getFavorites_resty_v0 = functions.https.onRequest(async (request, respon
       fetchPromises.push(nextPromiss);
     });
     const snapshots = await Promise.all(fetchPromises);
-      const responseArray = snapshots.map((snapshot) => { return snapshot.data()});
-      response.send('Done fetching' + (util.inspect(responseArray)));
+      const responseArray = snapshots.map((snapshot) => {
+        const snapData = snapshot.data();
+        if (snapData) {
+          snapData['.id'] = snapshot.id;
+        }
+        return snapData;
+      });
+      console.log('Done fetching' + (util.inspect(responseArray)));
   } else {
     response.send('All done!');
   }

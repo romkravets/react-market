@@ -43,7 +43,7 @@ export class FavoriteProject extends Component {
          <div className="container project-list section">
             <div className="project-list section">
             {this.state.data.data && this.state.data.data.map( project => {
-                  console.log(project, 'project');
+                  console.log(project.title, 'project');
                return (
                   <Link to={'/project/' + project.id} key={project.id}>
                      <ProjectSummary  project={project}/>

@@ -52,7 +52,7 @@ export const signUp = (newUser) => {
       const uid = currentUser.uid;
       const userDate = {
          lastlogitTime: new Date(),
-         favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB',]
+         favoritsList: ['kKsFSkOdHKfJBr8hCMBf', 'WrIwkObWAgTlJonLnQEB', 'Qedua3XamHxkK8IqPG0j']
       };
       return firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
    //  });
