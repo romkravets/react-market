@@ -7,7 +7,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
 import FavoriteProject from './components/projects/FavoriteProject';
-import User from './components/user/User';
+import EditProfile from './components/user/EditProfile/EditProfile';
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
             <Route  path="/signup" component={SignUp} />
             <Route  path="/create" component={CreateProject} />
             <Route  path="/favorite" component={FavoriteProject} />
-            {/* <Route  path="/profile" component={User} /> */}
+            <Route  path="/edit-profile" component={EditProfile} />
           </Switch>
         </div>
       </BrowserRouter>

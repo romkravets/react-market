@@ -47,7 +47,7 @@ export class FavoriteProject extends Component {
             <div className="project-list section">
             <div className="row">
                <div className="col s4">
-               {favoriteAded}
+                  {favoriteAded}
                 </div>
                </div>
             </div>

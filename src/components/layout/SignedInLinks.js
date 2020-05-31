@@ -36,7 +36,7 @@ class SignedInLinks extends Component {
                   <span> {profile.firstName} {profile.lastName}</span>
                   <span>096 889 483 83</span>
                   <br/>
-                  <NavLink className="lighten-4 grey-text" to="">Edit profile</NavLink>
+                  <NavLink to="/edit-profile" className="lighten-4 grey-text" to="">Edit profile</NavLink>
                   <hr/>
                   <div>
                      <a className="lighten-4 grey-text" onClick={this.props.signOut}>Log Out</a>
