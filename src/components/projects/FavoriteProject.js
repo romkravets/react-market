@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProjectSummary from './ProjectSummary';
 import { createProject } from '../../store/actions/projectActions';
 import { updateUserInfo } from '../../store/actions/authActions';
@@ -16,49 +16,53 @@ export class FavoriteProject extends Component {
 
    componentDidMount() {
       this.props.updateUserInfo();
-            const uid =  firebase.auth().currentUser.uid;
-            const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
-            getFavoritsFunctions({uid: uid})
-               .then((result) => {
-                  this.setState({data: result});
-                  this.setState({loadData: true});
-            })
-         }
+      const uid = firebase.auth().currentUser.uid;
+      const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
+      getFavoritsFunctions({ uid: uid })
+         .then((result) => {
+            this.setState({ data: result });
+            this.setState({ loadData: true });
+         })
+   }
 
    render() {
-      const { profile } = this.props;
+      const { profile,  } = this.props;
+      const { loadData } = this.state;
+      let counFavorite = null;
       let favoriteAded = <Spinner />;
-      if (this.state.loadData) {
-         favoriteAded = ( this.state.data.data && this.state.data.data.map( project => {
+      if (loadData) {
+         counFavorite = this.state.data.data.length;
+         favoriteAded = (this.state.data.data && this.state.data.data.map(project => {
             return (
                <div class="col s12 m4">
-               <Link to={'/project/' + project.id} key={project.id}>
-                  <ProjectSummary  project={project}/>
-               </Link>
+                  <Link to={'/project/' + project.id} key={project.id}>
+                     <ProjectSummary project={project} />
+                  </Link>
                </div>
-               )
-            })
             )
-         }
-         if (this.state.loadData && !this.state.data.data.length) {
-            console.log(this.state.data.data.length);
-            favoriteAded = <p>Favorite list is ampty</p>
-         }
-       return (
+         })
+         )
+      }
+      if (loadData && !this.state.data.data.length) {
+         console.log(this.state.data.data.length);
+         favoriteAded = <p>Favorite list is ampty</p>
+      }
+      return (
          <div className="container project-list section">
             <div className="project-list section">
-            <div className="row">
-               {/* <div className="col s4"> */}
+               <div>
+                  <span>SAVED ITEMS ({counFavorite})</span>
+               </div>
+               <div className="row">
                   {favoriteAded}
-                {/* </div> */}
                </div>
             </div>
          </div>
-       )
+      )
    }
 }
 
-const  mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
    return {
       profile: state.firebase.profile,
    }
