@@ -5,8 +5,7 @@ import ProjectSummary from './ProjectSummary';
 import { createProject } from '../../store/actions/projectActions';
 import { updateUserInfo } from '../../store/actions/authActions';
 import { getFavorits } from '../../store/actions/authActions';
-// import { Redirect } from 'react-router-dom';
-// import { storage } from '../../config/fb.config';
+import Spinner from "../UI/Spinner/Spinner";
 import firebase, { db } from '../../config/fb.config';
 
 export class FavoriteProject extends Component {
@@ -28,25 +27,25 @@ export class FavoriteProject extends Component {
 
    render() {
       const { profile } = this.props;
-      let favorite = null;
-      if (this.state.loadData === true && profile.favoritsList.length === 0) {
-         console.log(this.state.data.data.length);
-         favorite = <p>Favorite list is ampty</p>
-         console.log('0');
-      } else {
-         favorite = ( this.state.data.data && this.state.data.data.map( project => {
+      let favoriteAded = <Spinner />;
+      if (this.state.loadData) {
+         favoriteAded = ( this.state.data.data && this.state.data.data.map( project => {
             return (
                <Link to={'/project/' + project.id} key={project.id}>
                   <ProjectSummary  project={project}/>
                </Link>
+               )
+            })
             )
-         })
-         )
-      }
+         }
+         if (this.state.loadData && !this.state.data.data.length) {
+            console.log(this.state.data.data.length);
+            favoriteAded = <p>Favorite list is ampty</p>
+         }
        return (
          <div className="container project-list section">
             <div className="project-list section">
-               {favorite}
+               {favoriteAded}
             </div>
          </div>
        )

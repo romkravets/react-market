@@ -5,12 +5,16 @@ import Notifications from './Notification';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import Spinner from "../UI/Spinner/Spinner";
 
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
    render() {
-      const { projects, auth, notifications } = this.props;
+      let projectsAdded = <Spinner />;
+      const { projects, auth, notifications, test } = this.props;
+      console.log(projects, 'Dashboard projects');
+      console.log(test, 'Dashboard state.firestore');
 
       if (!auth.uid) return <Redirect to='/signin'/>
 
@@ -32,6 +36,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
    return {
       projects: state.firestore.ordered.projects,
+      test: state.firestore,
       auth: state.firebase.auth,
       notifications: state.firestore.ordered.notifications
    }
