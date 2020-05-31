@@ -1,4 +1,5 @@
 import React from 'react';
+import User from '../user/User';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -35,25 +36,32 @@ const ProjectDetails = (props) => {
    if (project) {
      return(
       <div className="container section project-details">
-         <div onClick={hendleBackToHome}>Back</div>
-         <div className="card z-depth-0">
-            <div className="card-content">
-               <div class="card-image">
-                  <img src={project.imgUrl} alt={project.title}/>
-                  <div>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}>Add +<i class="material-icons"></i></a>
+            <div className="row">
+               <div className="col s12 m6">
+               <div onClick={hendleBackToHome}>Back</div>
+                  <div className="card z-depth-0">
+                     <div className="card-content">
+                  <div class="card-image">
+                     <img src={project.imgUrl} alt={project.title}/>
+                     <div>
+                     <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}>Add +<i class="material-icons"></i></a>
+                     </div>
                   </div>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}>Rem -<i class="material-icons"></i></a>
+                  <span className="card-title">{ project.title }</span>
+                  <p>{ project.content }</p>
                </div>
-               <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}>Rem -<i class="material-icons"></i></a>
-               <span className="card-title">{ project.title }</span>
-               <p>{ project.content }</p>
-            </div>
-            <div className="card-action grey lighten-4 grey-text">
-               <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
-               <div>{moment(project.createAt.toDate()).calendar()}</div>
+               <div className="card-action grey lighten-4 grey-text">
+                  <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
+                  <div>{moment(project.createAt.toDate()).calendar()}</div>
+               </div>
+               </div>
+               </div>
+               <div className="col s12 m5 offset-m1">
+                  <User/>
+               </div>
             </div>
          </div>
-   </div>
    )
   } else {
    return (
