@@ -47,8 +47,6 @@ export const signUp = (newUser) => {
    return (dispatch, getState, {getFirebase, getFirestore}) => {
     const currentUser = firebase.auth().currentUser;
     let userFavorits = [];
-   //  .then(() => {
-      // dispatch({ type: 'UPDATE_SUCCESS' });
       console.log('You are' , currentUser.uid);
       const uid = currentUser.uid;
       const userDate = {lastlogitTime: new Date()};
@@ -61,8 +59,6 @@ export const signUp = (newUser) => {
          }
       });
       return Promise.all([updatePromiss, getPromiss]);
-   //  });
-
    }
  }
 

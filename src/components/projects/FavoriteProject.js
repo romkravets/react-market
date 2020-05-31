@@ -11,45 +11,45 @@ import firebase, { db } from '../../config/fb.config';
 
 export class FavoriteProject extends Component {
    state = {
-      data: []
+      data: [],
+      loadData: false
    }
 
    componentDidMount() {
       this.props.updateUserInfo();
-            //   const getFavorits = () => {
-         // return (dispatch, getState, {getFirebase, getFirestore}) => {
             const uid =  firebase.auth().currentUser.uid;
             const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
             getFavoritsFunctions({uid: uid})
                .then((result) => {
-               // console.log(result);
-               // result.data.forEach(project => {
-                  // const test = JSON.stringify(result);
-                  this.setState({data: result})
-                  console.log(this.state.data, 'data state')
-                  // dispatch({ type: 'UPDATE_SUCCESS', test });
-               // })
+                  this.setState({data: result});
+                  this.setState({loadData: true});
             })
-         // }
-      //  }
-   }
+         }
 
    render() {
       const { profile } = this.props;
+      let favorite = null;
+      if (this.state.loadData === true && profile.favoritsList.length === 0) {
+         console.log(this.state.data.data.length);
+         favorite = <p>Favorite list is ampty</p>
+         console.log('0');
+      } else {
+         favorite = ( this.state.data.data && this.state.data.data.map( project => {
+            return (
+               <Link to={'/project/' + project.id} key={project.id}>
+                  <ProjectSummary  project={project}/>
+               </Link>
+            )
+         })
+         )
+      }
        return (
          <div className="container project-list section">
             <div className="project-list section">
-            {this.state.data.data && this.state.data.data.map( project => {
-                  // console.log(project.title, 'project');
-               return (
-                  <Link to={'/project/' + project.id} key={project.id}>
-                     <ProjectSummary  project={project}/>
-                  </Link>
-               )
-            })}
+               {favorite}
             </div>
          </div>
-         )
+       )
    }
 }
 

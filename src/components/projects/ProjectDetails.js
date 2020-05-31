@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { addToFavorites, removeFromFavorites } from '../../store/actions/authActions';
 import moment from 'moment';
 
@@ -16,15 +16,21 @@ const ProjectDetails = (props) => {
    console.log('redirect');
    props.removeFromFavorites(props.id);
    // <Redirect to='/favorite'/>
-   console.log(props.history);
+   // console.log(props.history);
    props.history.push(`/favorite`);
  }
 
  const hendleBackToHome = () => {
-   props.history.push(`/`);
+   // console.log(props.history);
+   if (props.history.push() === "/favorite") {
+      props.history.push(`/favorite`);
+   } else {
+      props.history.push(`/`);
+   }
  }
 
   const { project, auth } = props;
+  console.log(props.history, 'page');
    if (!auth.uid) return <Redirect to='/signin'/>
    if (project) {
      return(
