@@ -22,7 +22,7 @@ class App extends Component {
             <Route  path="/signup" component={SignUp} />
             <Route  path="/create" component={CreateProject} />
             <Route  path="/favorite" component={FavoriteProject} />
-            <Route  path="/profile" component={User} />
+            {/* <Route  path="/profile" component={User} /> */}
           </Switch>
         </div>
       </BrowserRouter>

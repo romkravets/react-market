@@ -12,9 +12,7 @@ import { connect } from 'react-redux';
 class Dashboard extends Component {
    render() {
       let projectsAdded = <Spinner />;
-      const { projects, auth, notifications, test } = this.props;
-      console.log(projects, 'Dashboard projects');
-      console.log(test, 'Dashboard state.firestore');
+      const { projects, auth, notifications } = this.props;
 
       if (!auth.uid) return <Redirect to='/signin'/>
 

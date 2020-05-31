@@ -2,10 +2,19 @@ import React from "react";
 
 import { connect } from 'react-redux';
 
-const user = () => {
+const user = (props) => {
+   const { project } = props;
    return (
      <div className="container section">
-        <h2>User</h2>
+        <div className="text-center">
+         <div className="btn btn-floating pink lighten-1">
+            {project.authorFirstName[0] + project.authorLastName[0]}
+         </div>
+       <div><span>{project.authorFirstName} {project.authorLastName}</span></div>
+       </div>
+       <button class="btn waves-effect waves-light" type="submit" name="action">Chat with seller
+         <i class="material-icons right">send</i>
+      </button>
      </div>
    )
 }
@@ -16,12 +25,4 @@ const  mapStateToProps = (state) => {
    }
 }
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-      // createProject: (project) => dispatch(createProject(project)),
-      // updateUserInfo: () => dispatch(updateUserInfo()),
-      // getFavorits: () => dispatch(getFavorits()),
-   }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(user);
+export default connect(mapStateToProps)(user);

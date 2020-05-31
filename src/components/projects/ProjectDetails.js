@@ -44,10 +44,10 @@ const ProjectDetails = (props) => {
                   <div class="card-image">
                      <img src={project.imgUrl} alt={project.title}/>
                      <div>
-                     <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}>Add +<i class="material-icons"></i></a>
+                     <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}><i class="material-icons">favorite</i></a>
                      </div>
                   </div>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}>Rem -<i class="material-icons"></i></a>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}><i class="material-icons">favorite_border</i></a>
                   <span className="card-title">{ project.title }</span>
                   <p>{ project.content }</p>
                </div>
@@ -58,7 +58,7 @@ const ProjectDetails = (props) => {
                </div>
                </div>
                <div className="col s12 m5 offset-m1">
-                  <User/>
+                  <User project={project}/>
                </div>
             </div>
          </div>

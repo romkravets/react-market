@@ -45,7 +45,11 @@ export class FavoriteProject extends Component {
        return (
          <div className="container project-list section">
             <div className="project-list section">
+            <div className="row">
+               <div className="col s4">
                {favoriteAded}
+                </div>
+               </div>
             </div>
          </div>
        )
