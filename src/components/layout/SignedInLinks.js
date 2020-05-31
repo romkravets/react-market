@@ -27,17 +27,6 @@ class SignedInLinks extends Component {
 	render() {
 		const { profile } = this.props;
 		let addFavorit = '';
-		// console.log(profile);
-		// console.log(profile);
-		// if (profile.isLoaded) {
-		// 	for (let key in profile.favoriteList) {
-		// 		console.log('yes');
-		// 	}
-		// 	// if(profile.favoriteList.length > 0) {
-		// 	// 	console.log('yes');
-		// 	// }
-		// 	console.log('isLoaded');
-		// } 
       if (true) {
          addFavorit = 'favorite';
       } else {

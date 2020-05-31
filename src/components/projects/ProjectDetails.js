@@ -31,9 +31,6 @@ const ProjectDetails = (props) => {
    }
 
    const { project, auth, profile } = props;
-   // console.log(props.history, 'page');
-   // console.log(profile.favoritsList, 'profile');
-   // console.log(id , 'id');
 
    let addFavorit = ''
       if (profile.favoritsList.indexOf(props.id) != -1) {
