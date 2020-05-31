@@ -43,12 +43,33 @@ export const signUp = (newUser) => {
    }
  }
 
+ export const editProfile = (editUser) => {
+   return (dispatch, getState, {getFirebase, getFirestore}) => {
+    const currentUser = firebase.auth().currentUser;
+      let userFavorits = [];
+      // console.log('You are' , currentUser.uid);
+      const uid = currentUser.uid;
+      const userDate = {
+         firstName: editUser.firstName,
+         lastName: editUser.lastName,
+         initials: editUser.firstName[0] + editUser.lastName[0],
+      };
+      const updatePromiss = firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
+      const getPromiss = firebase.firestore().doc(`users/${uid}`).onSnapshot((doc) => {
+         const userData = doc.data();
+         if (userData.favoritsList) {
+            userFavorits = userData.favoritsList;
+         }
+      });
+      return Promise.all([updatePromiss, getPromiss]);
+   }
+ }
+
+
  export const updateUserInfo = () => {
    return (dispatch, getState, {getFirebase, getFirestore}) => {
     const currentUser = firebase.auth().currentUser;
     let userFavorits = [];
-   //  .then(() => {
-      // dispatch({ type: 'UPDATE_SUCCESS' });
       console.log('You are' , currentUser.uid);
       const uid = currentUser.uid;
       const userDate = {lastlogitTime: new Date()};
@@ -61,8 +82,6 @@ export const signUp = (newUser) => {
          }
       });
       return Promise.all([updatePromiss, getPromiss]);
-   //  });
-
    }
  }
 

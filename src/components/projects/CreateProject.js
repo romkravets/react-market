@@ -29,6 +29,7 @@ export class CreateProject extends Component {
 
    handleUpload = (e) => {
       e.preventDefault();
+      if (this.state.image) {
       const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
       uploadTask.on(
          "state_changed",
@@ -58,6 +59,9 @@ export class CreateProject extends Component {
             });
          }
       );
+      } else {
+         console.log('Add image pleace');
+      }
    }
 
    render() {
@@ -86,7 +90,7 @@ export class CreateProject extends Component {
                   </div>
                 </div>
                <div className="input-field">
-                  <button className="btn pink lighten-1 z-depth-0">Create</button>
+                  <button className="btn waves-effect lighten-1 z-depth-0 waves-light btn-large">Submit</button>
                </div>
             </form>
          </div>
