@@ -31,9 +31,11 @@ export class FavoriteProject extends Component {
       if (this.state.loadData) {
          favoriteAded = ( this.state.data.data && this.state.data.data.map( project => {
             return (
+               <div class="col s12 m4">
                <Link to={'/project/' + project.id} key={project.id}>
                   <ProjectSummary  project={project}/>
                </Link>
+               </div>
                )
             })
             )
@@ -46,9 +48,9 @@ export class FavoriteProject extends Component {
          <div className="container project-list section">
             <div className="project-list section">
             <div className="row">
-               <div className="col s4">
+               {/* <div className="col s4"> */}
                   {favoriteAded}
-                </div>
+                {/* </div> */}
                </div>
             </div>
          </div>
