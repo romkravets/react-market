@@ -1,32 +1,75 @@
-import React from "react";
-
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import { editProfile } from '../../../store/actions/authActions'
 
-const EditProfile = (props) => {
-   const { profile } = this.props;
-   return (
-     <div className="container section">
-         <div className="lighten-4 grey-text">
-            <h4>Profile</h4>
-            <div className="btn btn-floating pink lighten-1" onClick={this.handleUserInfo}>
-               {profile.initials}
+export class EditProfile extends Component {
+   state = {
+      firstName: '',
+      lastName: ''
+   }
+   handleChange = (e) => {
+      this.setState({
+         [e.target.id]: e.target.value
+      })
+   }
+   handleSubmit = (e) => {
+      e.preventDefault();
+      this.props.editProfile(this.state);
+      this.props.history.push(`/`);
+   }
+
+   render() {
+      const { auth, authError } = this.props;
+      let authRedirect = null;
+      if (auth.uid) {
+         // authRedirect = <Redirect to='/'/>
+      // } else {
+         authRedirect = (
+            <div className="container">
+            <form onSubmit={this.handleSubmit} className="white">
+               <h5 className="grey-text text-darcen-3">Edit profile</h5>
+               {/* <div className="input-field">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" onChange={this.handleChange}/>
+               </div> */}
+               {/* <div className="input-field">
+                  <label htmlFor="password">Password</label>
+                  <input type="password" id="password" onChange={this.handleChange}/>
+               </div> */}
+               <div className="input-field">
+                  <label htmlFor="firstName">First Name</label>
+                  <input type="text" id="firstName" onChange={this.handleChange} required/>
                </div>
-               <span> {profile.firstName} {profile.lastName}</span>
-               <span>096 889 483 83</span>
-               <br/>
-               <hr/>
-                <div>
-                  <a className="lighten-4 grey-text" onClick={this.props.signOut}>Log Out</a>
+               <div className="input-field">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input type="text" id="lastName" onChange={this.handleChange} required/>
+               </div>
+               <div className="input-field">
+                  <button className="btn pink lighten-1 z-depth-0">Edit</button>
+                  <div className="red-text center">
+                        { authError ? <p>{ authError }</p>: null }
                   </div>
                </div>
-     </div>
-   )
-}
-
-const  mapStateToProps = (state) => {
-   return {
-      profile: state.firebase.profile,
+            </form>
+         </div>
+         )
+      }
+      return authRedirect;
    }
 }
 
-export default connect(mapStateToProps)(EditProfile);
+const mapStateToProps = (state) => {
+   return {
+      auth: state.firebase.auth,
+      authError: state.auth.authError
+   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+   return {
+      editProfile: (editUser) => dispatch(editProfile(editUser))
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

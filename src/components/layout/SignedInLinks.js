@@ -16,11 +16,33 @@ class SignedInLinks extends Component {
 		console.log(this.state);
 	}
 
+	hendleRedirect = () => {
+		// <Redirect to="/edit-profile"/>
+		this.setState({purchasing: false });
+	}
+
 	handleUserInfoClose = () => {
 		this.setState({ purchasing: false });
 	};
 	render() {
 		const { profile } = this.props;
+		let addFavorit = '';
+		// console.log(profile);
+		// console.log(profile);
+		// if (profile.isLoaded) {
+		// 	for (let key in profile.favoriteList) {
+		// 		console.log('yes');
+		// 	}
+		// 	// if(profile.favoriteList.length > 0) {
+		// 	// 	console.log('yes');
+		// 	// }
+		// 	console.log('isLoaded');
+		// } 
+      if (true) {
+         addFavorit = 'favorite';
+      } else {
+         addFavorit = 'favorite_border';
+      }
 		return (
 			<Aux>
 				<Modal show={this.state.purchasing} modalClosed={this.handleUserInfoClose}>
@@ -32,7 +54,7 @@ class SignedInLinks extends Component {
 						<span> {profile.firstName} {profile.lastName}</span>
 						<span>096 889 483 83</span>
 						<br />
-						<Link to="/edit-profile" className="lighten-4 grey-text" to="">Edit profile</Link>
+						<Link to="/edit-profile" onClick={this.hendleRedirect} className="lighten-4 grey-text">Edit profile</Link>
 						<hr />
 						<div>
 							<a className="lighten-4 grey-text" onClick={this.props.signOut}>Log Out</a>
@@ -43,7 +65,7 @@ class SignedInLinks extends Component {
 					<li><Link to="/message"><i class="material-icons">move_to_inbox</i></Link></li>
 					<li><Link class="btn waves-effect waves-light" to="/create">New Product</Link></li>
 					<li><a className="btn btn-floating pink lighten-1" onClick={this.handleUserInfo}>{profile.initials}</a></li>
-					<li><Link to="/favorite"><i class="material-icons">favorite</i></Link></li>
+					<li><Link to="/favorite"><i class="material-icons">{addFavorit}</i></Link></li>
 				</ul>
 			</Aux>
 		)

@@ -25,3 +25,26 @@ form button, form h5 {
   height: 77px;
   align-items: center;
 }
+
+.page-footer {
+  background: rgba(192, 196, 206, 0.127321);
+  margin-top: 30px;
+  padding-top: 0;
+  height: 73px;
+  display: flex;
+  align-items: center;
+}
+
+.page-footer .row {
+  margin-bottom: 0
+}
+
+.page-footer ul {
+  display: flex;
+  justify-content: center;
+}
+
+.page-footer li, .page-footer li a {
+  color: #C0C4CE;
+  margin: 0 8px;
+}
