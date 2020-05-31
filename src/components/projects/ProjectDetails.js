@@ -14,9 +14,8 @@ const ProjectDetails = (props) => {
    }
 
    const removeFavorits = () => {
-      console.log('redirect');
       props.removeFromFavorites(props.id);
-      // <Redirect to='/favorite'/>
+      //<Redirect to='/favorite'/>
       // console.log(props.history);
       // props.history.push(`/favorite`);
    }
