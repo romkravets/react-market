@@ -4,11 +4,32 @@ import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Modal from '../../components/UI/Modal/Modal';
+import firebase, { db } from '../../config/fb.config';
 
 class SignedInLinks extends Component {
 	state = {
 		purchasing: false,
+		userFavorits: [],
+		load: false
 	}
+
+	componentDidMount () {
+		const currentUser = firebase.auth().currentUser;
+		  const uid = currentUser.uid;
+		  const userDate = {lastlogitTime: new Date()};
+		  const updatePromiss = firebase.firestore().doc(`users/${uid}`).set(userDate, {merge: true});
+		  const getPromiss = firebase.firestore().doc(`users/${uid}`).onSnapshot((doc) => {
+			  const userData = doc.data();
+			  if (userData.favoritsList) {
+				  this.setState({
+					  userFavorits: userData.favoritsList,
+					});
+					this.setState({ load: true})
+			  }
+		  });
+		  return Promise.all([updatePromiss, getPromiss]);
+	}
+
 	handleUserInfo = () => {
 		this.setState(prevState => ({
 			purchasing: !prevState.purchasing
@@ -17,17 +38,17 @@ class SignedInLinks extends Component {
 	}
 
 	hendleRedirect = () => {
-		// <Redirect to="/edit-profile"/>
 		this.setState({purchasing: false });
 	}
 
 	handleUserInfoClose = () => {
 		this.setState({ purchasing: false });
 	};
+
 	render() {
 		const { profile } = this.props;
 		let addFavorit = '';
-      if (false) {
+      if (this.state.userFavorits.length != 0 && this.state.load) {
          addFavorit = 'favorite';
       } else {
          addFavorit = 'favorite_border';
