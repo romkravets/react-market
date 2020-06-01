@@ -7,15 +7,33 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { addToFavorites, removeFromFavorites } from '../../store/actions/authActions';
 import moment from 'moment';
+import 'react-toastify/dist/ReactToastify.css'
+import {toast} from 'react-toastify'
 
 const ProjectDetails = (props) => {
 
+   const showToast = (type, message) => {
+      // 0 = warning, 1 = success
+      switch (type) {
+          case 0:
+              toast.warning(message)
+              break
+          case 1:
+              toast.success(message)
+              break
+          default:
+              break
+      }
+  }
+
    const hendleFavorite = () => {
       props.addToFavorites(props.id);
+      showToast(1, 'Added to favorite');
    }
 
    const removeFavorits = () => {
       props.removeFromFavorites(props.id);
+      showToast(0, 'Removed from favorite');
       //<Redirect to='/favorite'/>
       // console.log(props.history);
       // props.history.push(`/favorite`);

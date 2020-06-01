@@ -9,10 +9,12 @@
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-loading": "^2.0.3",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "1.1.5",
+    "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0"
