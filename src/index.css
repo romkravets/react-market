@@ -10,6 +10,17 @@ body {
   min-height: 100%;
 }
 
+.overlay::before {
+  z-index: 1;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 18%, rgba(0,0,0,0.8) 99%, rgba(0,0,0,0.8) 100%);
+}
+
 form {
   padding: 20px;
   margin-top: 60px;
@@ -25,6 +36,20 @@ form button, form h5 {
   height: 77px;
   align-items: center;
 }
+
+.dashboard .card .card-image img {
+  height: 180px;
+}
+
+.page-favorite img {
+   height: 200px;
+}
+
+.card .card-image .card-title {
+  z-index: 1;
+}
+
+.page-favorite
 
 .page-footer {
   background: rgba(192, 196, 206, 0.127321);

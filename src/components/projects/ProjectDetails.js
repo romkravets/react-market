@@ -1,5 +1,6 @@
 import React from 'react';
 import User from '../user/User';
+import Spinner from "../UI/Spinner/Spinner";
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -32,7 +33,7 @@ const ProjectDetails = (props) => {
    const { project, auth, profile } = props;
 
    let addFavorit = ''
-      if (profile.favoritsList.indexOf(props.id) != -1) {
+      if (profile.isLoaded === true && profile.favoritsList.indexOf(props.id) != -1) {
          addFavorit = <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}><i class="material-icons">favorite</i></a>;
       } else {
          addFavorit = <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}><i class="material-icons">favorite_border</i></a>;
@@ -72,7 +73,7 @@ const ProjectDetails = (props) => {
    } else {
       return (
          <div className="container center">
-            <p>Loading project...</p>
+            <Spinner />
          </div>
       )
    }
