@@ -27,7 +27,7 @@ class SignedInLinks extends Component {
 	render() {
 		const { profile } = this.props;
 		let addFavorit = '';
-      if (true) {
+      if (false) {
          addFavorit = 'favorite';
       } else {
          addFavorit = 'favorite_border';
