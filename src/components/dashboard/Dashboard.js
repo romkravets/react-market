@@ -15,7 +15,7 @@ class Dashboard extends Component {
       const { projects, auth, notifications } = this.props;
 
       if (!auth.uid) return <Redirect to='/signin'/>
-
+      if (projects) {
       return (
          <div className="container dashboard">
             <div className="row">
@@ -27,7 +27,14 @@ class Dashboard extends Component {
                </div>
             </div>
          </div>
-      )
+         )
+      } else {
+         return (
+            <div className="container center">
+               <Spinner />
+            </div>
+         )
+      }
    }
 }
 

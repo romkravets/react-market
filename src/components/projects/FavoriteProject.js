@@ -48,7 +48,7 @@ export class FavoriteProject extends Component {
          favoriteAded = <p>Favorite list is ampty</p>
       }
       return (
-         <div className="container project-list section">
+         <div className="container project-list section page-favorite">
             <div className="project-list section">
                <div>
                   <span>SAVED ITEMS ({counFavorite})</span>

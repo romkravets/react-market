@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Modal from '../../components/UI/Modal/Modal';
+import CloseBtn from '../UI/CloseBtn/CloseBtn';
 
 import { connect } from 'react-redux';
 class User extends Component {
@@ -24,7 +25,10 @@ class User extends Component {
          <Aux>
          <Modal show={this.state.purchasing} modalClosed={this.handleUserInfoClose}>
             <div className="lighten-4 grey-text">
-               <h4>Profile</h4>
+               <div className="row">
+                  <div className="col s6"><h4>Profile</h4></div>
+                  <div className="col s6"><CloseBtn click={this.state.purchasing} clicked={this.handleUserInfoClose}/></div>
+               </div>
                <div className="btn btn-floating pink lighten-1" onClick={this.handleUserInfo}>
                   {project.authorFirstName[0] + project.authorLastName[0]}
                </div>

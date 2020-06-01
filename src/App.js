@@ -9,6 +9,7 @@ import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
 import FavoriteProject from './components/projects/FavoriteProject';
 import EditProfile from './components/user/EditProfile/EditProfile';
+import Chat from './components/chat/Chat';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route  path="/create" component={CreateProject} />
             <Route  path="/favorite" component={FavoriteProject} />
             <Route  path="/edit-profile" component={EditProfile} />
+            <Route  path="/live-chat" component={Chat} />
           </Switch>
           {/* <Footer/> */}
         </div>

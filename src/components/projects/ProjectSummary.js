@@ -6,7 +6,7 @@ const ProjectSummary = ({project}) => {
 
       <div className="card z-depth-0 project-summary">
          <div class="card">
-        <div class="card-image">
+        <div class="card-image overlay">
           <img src={project.imgUrl} alt={project.title}/>
           <span class="card-title white-text text-darken-3">{project.title}</span>
         </div>
