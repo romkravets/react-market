@@ -1,9 +1,18 @@
 import React from 'react';
+import 'react-toastify/dist/ReactToastify.css'
 
-const WelcomeBoar = () => {
+const WelcomeBoard = (props) => {
    return (
-      <h2>WelcomeBoard</h2>
+      <div className="viewWelcomeBoard">
+      <span className="textTitleWelcome">{`Welcome, ${props.currentUserNickname.firstName}`}</span>
+         <div className="btn btn-floating pink lighten-1">
+            { props.currentUserNickname.initials }
+            </div>
+              <span className="textDesciptionWelcome">
+         Let's start talking. Great things might happen.
+      </span>
+   </div>
    )
 }
 
-export default WelcomeBoar;
+export default WelcomeBoard;

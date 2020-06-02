@@ -33,7 +33,7 @@ class Chat extends Component {
                 this.setState({
                     listUser: userData,
                   });
-                  this.setState({ load: true})
+                  this.setState({ isLoading: true})
                   console.log(this.state.listUser);
             }
         });
@@ -49,43 +49,59 @@ class Chat extends Component {
                 <div className="row">
                     <div className="col s4">
                     <h2>Users</h2>
-                        {users && users.map(user => {
+                        {users && users.map((user, index) => {
                             return (
-                                <Link to="">
+                                <button
+                                    key={index}
+                                    onClick={() => {
+                                        this.setState({ currentPeerUser: user });
+                                        console.log(this.state.currentPeerUser);
+                                      }}>
                                     <h3>{user.firstName} {user.lastName}</h3>
                                     <div className="btn btn-floating pink lighten-1">
-                                        {user.initials}
+                                        { user.initials }
                                     </div>
-                                 </Link>
+                                 </button>
                                 )
                             })}
                     </div>
                     <div className="col s8">
-                        {messages && messages.map(message => {
+                        {this.state.currentPeerUser ? (
+                                <ChatBoard
+                                    currentPeerUser={this.state.currentPeerUser}
+                                    messages={messages}
+                                    // showToast={this.props.showToast}
+                                />
+                            ) : (
+                                <WelcomeBoard
+                                    currentUserNickname={this.state.listUser}
+                                    
+                                    // currentUserAvatar={this.currentUserAvatar}
+                                />
+                            )}
+                        {/* {messages && messages.map(message => {
                             return (
                                 <p>{message.message}</p>
                                 )
-                            })}
-                        <ChatBoard
-                            currentPeerUser={this.state.currentPeerUser}
-                            showToast={this.props.showToast}/>
-                        <WelcomeBoard
-                            currentUserNickname={this.currentUserNickname}
-                            currentUserAvatar={this.currentUserAvatar}
-                        />
+                            })} */}
                     </div>
                 </div>
+                 {/* Loading */}
+                 {this.state.isLoading ? (
+                    <div className="viewLoading">
+                        <ReactLoading
+                            type={'spin'}
+                            color={'#203152'}
+                            height={'3%'}
+                            width={'3%'}
+                        />
+                    </div>
+                ) : null}
             </div>
             )
         } else {
             return  (
                 <div className="container">
-                <ReactLoading
-                    type={'spin'}
-                    color={'#203152'}
-                    height={'3%'}
-                    width={'3%'}
-                    />
                 </div>
             )
         }
