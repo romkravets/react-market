@@ -3,7 +3,7 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Modal from '../../components/UI/Modal/Modal';
 import CloseBtn from '../UI/CloseBtn/CloseBtn';
 import {createMessage} from '../../store/actions/chatAction';
-
+import {toast} from 'react-toastify'
 import { connect } from 'react-redux';
 class User extends Component {
    state = {
@@ -11,6 +11,21 @@ class User extends Component {
       message: '',
       uidTo: ''
    }
+
+   showToast = (type, message) => {
+      // 0 = warning, 1 = success
+      switch (type) {
+          case 0:
+              toast.warning(message)
+              break
+          case 1:
+              toast.success(message)
+              break
+          default:
+              break
+      }
+  }
+
    handleUserInfoClose = () => {
 		this.setState({ purchasing: false });
    };
@@ -22,13 +37,19 @@ class User extends Component {
       this.setState({
          uidTo: this.props.project.authorId
       })
-      console.log(this.state.message);
    }
 
    handleUpload = (e) => {
       e.preventDefault();
-      this.props.createMessage(this.state);
-      console.log(this.state, 'this.state.message');
+      const content = {
+         message: this.state.message,
+         uidTo:  this.state.uidTo
+      }
+      this.props.createMessage(content);
+      this.showToast(1, 'Message send');
+      setTimeout(() => {
+         this.setState({ purchasing: false });
+       }, 1000);
    }
 
    handleUserInfo = () => {
@@ -57,7 +78,7 @@ class User extends Component {
                      <div class="row">
                      <div class="input-field col s12">
                         <i class="material-icons prefix">mode_edit</i>
-                        <textarea id="message" class="materialize-textarea" onChange={this.handleChange}></textarea>
+                        <textarea id="message" class="materialize-textarea" onChange={this.handleChange} required></textarea>
                         <label for="message">Message</label>
                      </div>
                      </div>

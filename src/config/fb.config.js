@@ -19,15 +19,6 @@ var firebaseConfig = {
 //   firebase.analytics();
   firebase.firestore().settings({timestampsInSnapshots: true});
 
-  // if (window.location.hostname === 'localhost') {
-  //   console.log('Localhost detected');
-  //   firebase.db.settings({
-  //     host: 'localhost: 3000',
-  //     ssl: false
-  //   });
-  //   firebase.functions().useFunctionsEmulator('http://localhost:5001');
-  // }
-
 const db = firebase.firestore();
 const storage = firebase.storage();
 export { db };

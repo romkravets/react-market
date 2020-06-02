@@ -51,8 +51,8 @@ const ProjectDetails = (props) => {
    const { project, auth, profile } = props;
 
    let addFavorit = ''
-   // if (profile.isLoaded && profile.favoritsList.indexOf(props.id) != -1) {
-      if (false) {
+//if (profile.isLoaded && profile.favoritsList.indexOf(props.id) != -1) {
+      if (profile.isLoaded && profile.favoritsList.indexOf(props.id) != -1) {
          addFavorit = <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}><i class="material-icons">favorite</i></a>;
       } else {
          addFavorit = <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={hendleFavorite}><i class="material-icons">favorite_border</i></a>;
@@ -84,7 +84,7 @@ const ProjectDetails = (props) => {
                   </div>
                </div>
                <div className="col s12 m5 offset-m1">
-                  <User project={project} profile={profile} />
+                  <User project={project} profile={profile} showToast={this.showToast} {...props} />
                </div>
             </div>
          </div>

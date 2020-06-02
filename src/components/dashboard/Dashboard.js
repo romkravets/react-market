@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component {
    render() {
-      let projectsAdded = <Spinner />;
       const { projects, auth, notifications } = this.props;
       console.log(notifications);
 
