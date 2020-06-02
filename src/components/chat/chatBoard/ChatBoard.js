@@ -129,16 +129,17 @@ onSendMessage = (content, type) => {
 
    render() {
          let messageRender = this.messages.map(message => {
-            console.log(this.currentPeerUser.uid === message.uidTo, 'this.currentPeerUser.uid === message.uidTo')
-            console.log(this.currentPeerUser.uid != message.uidTo, 'this.currentPeerUser.uid === message.uidTo !=')
+            // console.log(this.currentPeerUser.uid === message.uidTo, 'this.currentPeerUser.uid === message.uidTo')
+            // console.log(this.currentPeerUser.uid != message.uidTo, 'this.currentPeerUser.uid === message.uidTo !=')
 
             if (this.currentPeerUser.uid === message.uidTo) {
                return (
                <div>
                   {message.message}
+                 <b>{message.authorFirstName} {message.authorLastName}</b>
                </div>
                )
-            } 
+            }
             // else if (this.currentPeerUser.uid != message.uidTo) {
             //    return (
             //       <div>
@@ -149,7 +150,7 @@ onSendMessage = (content, type) => {
          })
       return (
          <div className="container">
-             <h2>Chat Board</h2>
+             {/* <h2>Chat Board</h2> */}
                <div>
                   {messageRender}
                </div>
