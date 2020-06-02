@@ -3,6 +3,9 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const util = require('util');
 
+// const app = admin.initializeApp();
+// const firestore = app.firestore();
+
 const createNotification = ((notification) => {
   return admin.firestore().collection('notifications')
     .add(notification)

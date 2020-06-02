@@ -1,6 +1,6 @@
 const initState = {
    authError: null,
-   favoritList: []
+   userFavorits: []
 }
 
 const authReducer = (state = initState, action) => {

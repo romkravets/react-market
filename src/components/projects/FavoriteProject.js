@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import ProjectSummary from './ProjectSummary';
 import { createProject } from '../../store/actions/projectActions';
 import { updateUserInfo } from '../../store/actions/authActions';
-import { getFavorits } from '../../store/actions/authActions';
 import Spinner from "../UI/Spinner/Spinner";
 import firebase, { db } from '../../config/fb.config';
 
@@ -72,7 +71,6 @@ const mapDispatchToProps = (dispatch) => {
    return {
       createProject: (project) => dispatch(createProject(project)),
       updateUserInfo: () => dispatch(updateUserInfo()),
-      getFavorits: () => dispatch(getFavorits()),
    }
 }
 

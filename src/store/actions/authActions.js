@@ -85,21 +85,6 @@ export const signUp = (newUser) => {
    }
  }
 
- export const getFavorits = () => {
-   return (dispatch, getState, {getFirebase, getFirestore}) => {
-      const uid =  firebase.auth().currentUser.uid;
-      const getFavoritsFunctions = firebase.functions().httpsCallable('getFavorites_v0');
-      getFavoritsFunctions({uid: uid})
-         .then((result) => {
-         console.log(result);
-         result.data.forEach(project => {
-            const test = JSON.stringify(result);
-            dispatch({ type: 'UPDATE_SUCCESS', test });
-         })
-      })
-   }
- }
-
  export const addToFavorites = (projectId) => {
    return (dispatch, getState, {getFirebase, getFirestore}) => {
       const currUserId = firebase.auth().currentUser.uid;
