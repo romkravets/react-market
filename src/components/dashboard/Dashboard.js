@@ -13,6 +13,7 @@ class Dashboard extends Component {
    render() {
       let projectsAdded = <Spinner />;
       const { projects, auth, notifications } = this.props;
+      console.log(notifications);
 
       if (!auth.uid) return <Redirect to='/signin'/>
       if (projects) {

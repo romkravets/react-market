@@ -2,20 +2,39 @@ import React, { Component } from "react";
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Modal from '../../components/UI/Modal/Modal';
 import CloseBtn from '../UI/CloseBtn/CloseBtn';
+import {createMessage} from '../../store/actions/chatAction';
 
 import { connect } from 'react-redux';
 class User extends Component {
    state = {
-		purchasing: false,
+      purchasing: false,
+      message: '',
+      uidTo: ''
    }
    handleUserInfoClose = () => {
 		this.setState({ purchasing: false });
    };
 
+   handleChange = (e) => {
+      this.setState({
+         [e.target.id]: e.target.value
+      })
+      this.setState({
+         uidTo: this.props.project.authorId
+      })
+      console.log(this.state.message);
+   }
+
+   handleUpload = (e) => {
+      e.preventDefault();
+      this.props.createMessage(this.state);
+      console.log(this.state, 'this.state.message');
+   }
+
    handleUserInfo = () => {
 		this.setState(prevState => ({
 			purchasing: !prevState.purchasing
-		}));
+      }));
 		console.log(this.state);
    }
 
@@ -29,20 +48,20 @@ class User extends Component {
                   <div className="col s6"><h4>Profile</h4></div>
                   <div className="col s6"><CloseBtn click={this.state.purchasing} clicked={this.handleUserInfoClose}/></div>
                </div>
-               <div className="btn btn-floating pink lighten-1" onClick={this.handleUserInfo}>
+               <div className="btn btn-floating pink lighten-1">
                   {project.authorFirstName[0] + project.authorLastName[0]}
                </div>
                <div><span>{project.authorFirstName} {project.authorLastName}</span></div>
                <div class="row">
-                  <form class="col s12">
+                  <form class="col s12" onSubmit={this.handleUpload}>
                      <div class="row">
                      <div class="input-field col s12">
                         <i class="material-icons prefix">mode_edit</i>
-                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                        <label for="icon_prefix2">Message</label>
+                        <textarea id="message" class="materialize-textarea" onChange={this.handleChange}></textarea>
+                        <label for="message">Message</label>
                      </div>
                      </div>
-                     <button class="btn waves-effect waves-light" onClick={this.handleUserInfo}>Submit<i class="material-icons right">send</i>
+                     <button class="btn waves-effect waves-light">Submit<i class="material-icons right">send</i>
                      </button>
                   </form>
                </div>
@@ -63,10 +82,16 @@ class User extends Component {
    }
 }
 
-const  mapStateToProps = (state) => {
+// const  mapStateToProps = (state) => {
+//    return {
+//       profile: state.firebase.profile,
+//    }
+// }
+
+const mapDispatchToProps = (dispatch) => {
    return {
-      profile: state.firebase.profile,
+      createMessage: (message) => dispatch(createMessage(message))
    }
 }
 
-export default connect(mapStateToProps)(User);
+export default connect(null, mapDispatchToProps)(User);

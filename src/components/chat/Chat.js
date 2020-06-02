@@ -1,48 +1,44 @@
-import React, {Component} from 'react'
-// import './Root.css'
-// import {BrowserRouter, Route, Switch} from 'react-router-dom'
-// // import Login from '../Login/Login'
-// import Main from './Main/Main'
-// // import Profile from '../Profile/Profile'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import {toast, ToastContainer} from 'react-toastify'
 
 class Chat extends Component {
 
     render() {
+        console.log(this.props.messages)
         return (
             <div className="container">
                  <h1>Chatty</h1>
+                 <div className="row">
+                     <div className="col s4">
+                        users
+                     </div>
+                     <div className="s8">
+                         messages
+                     </div>
+                 </div>
             </div>
-        //     <BrowserRouter>
-        //         <div>
-        //             <ToastContainer
-        //                 autoClose={2000}
-        //                 hideProgressBar={true}
-        //                 position={toast.POSITION.BOTTOM_RIGHT}
-        //             />
-        //             <Switch>
-        //                 {/* <Route
-        //                     exact
-        //                     path="/"
-        //                     render={props => <Login showToast={this.showToast} {...props} />}
-        //                 /> */}
-        //                 <Route
-        //                     exact
-        //                     path="/main"
-        //                     render={props => <Main showToast={this.showToast} {...props} />}
-        //                 />
-        //                 {/* <Route
-        //                     exact
-        //                     path="/profile"
-        //                     render={props => (
-        //                         <Profile showToast={this.showToast} {...props} />
-        //                     )}
-        //                 /> */}
-        //             </Switch>
-        //         </div>
-        //     </BrowserRouter>
         )
     }
 }
 
-export default Chat;
+const mapStateToProps = (state) => {
+    return {
+       messages: state.firestore.data.messages
+    }
+ }
+ 
+ const mapDispatchToProps = (dispatch) => {
+    return {
+      
+    }
+ }
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+       { collection: 'messages' }
+    ])
+ )(Chat);

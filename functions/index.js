@@ -6,6 +6,8 @@ const util = require('util');
 // const app = admin.initializeApp();
 // const firestore = app.firestore();
 
+
+//Notification
 const createNotification = ((notification) => {
   return admin.firestore().collection('notifications')
     .add(notification)
@@ -45,6 +47,10 @@ exports.userJoined = functions.auth.user()
 
       });
 });
+
+//Notification
+
+//Favorite render
 
 exports.getFavorites_v0 = functions.https.onCall(async(data, context) => {
   const userId = data.uid;
@@ -111,3 +117,5 @@ exports.getFavorites_resty_v0 = functions.https.onRequest(async (request, respon
     response.send('All done!');
   }
 });
+
+//Favorite render
