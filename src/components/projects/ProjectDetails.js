@@ -51,7 +51,6 @@ const ProjectDetails = (props) => {
    const { project, auth, profile } = props;
 
    let addFavorit = ''
-//if (profile.isLoaded && profile.favoritsList.indexOf(props.id) != -1) {
       if (profile.isLoaded && profile.favoritsList.indexOf(props.id) != -1) {
          addFavorit = <a class="btn-floating halfway-fab waves-effect waves-light red" onClick={removeFavorits}><i class="material-icons">favorite</i></a>;
       } else {

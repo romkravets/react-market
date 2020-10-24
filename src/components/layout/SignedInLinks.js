@@ -72,10 +72,10 @@ class SignedInLinks extends Component {
 					</div>
 				</Modal>
 				<ul className="right">
-					<li><Link to="/live-chat"><i class="material-icons">move_to_inbox</i></Link></li>
-					<li><Link class="btn waves-effect waves-light" to="/create">Sell</Link></li>
+					{/* <li><Link to="/live-chat"><i class="material-icons">move_to_inbox</i></Link></li> */}
+					<li><Link className="btn waves-effect waves-light" to="/create">Sell</Link></li>
 					<li><a className="btn btn-floating pink lighten-1" onClick={this.handleUserInfo}>{profile.initials}</a></li>
-					<li><Link to="/favorite"><i class="material-icons">{addFavorit}</i></Link></li>
+					<li><Link to="/favorite"><i className="material-icons">{addFavorit}</i></Link></li>
 				</ul>
 			</Aux>
 		)

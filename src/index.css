@@ -73,3 +73,7 @@ form button, form h5 {
   color: #C0C4CE;
   margin: 0 8px;
 }
+
+.card .card-image img {
+  height: 200px
+}
