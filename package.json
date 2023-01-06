@@ -13,7 +13,7 @@
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "1.1.5",
+    "react-scripts": "5.0.1",
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
